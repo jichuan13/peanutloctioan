@@ -1,0 +1,163 @@
+function g=BoundaryValue(n)
+h=2*pi/n;
+%apple-shape region(double integration)
+d1=0.3/2;
+rmax=@(theta) d1./sin(2*pi/3-theta)*sin(pi/3); % polar coordination:
+x0=-0.2;y0=0.4;
+for j=1:n+1
+    theta1=(j-1)*h;
+    z1=cos(theta1);z2=sin(theta1);
+    c=[z1,z2];
+    g(j,1)=quad2d(@(theta,r) func3(theta,r,c,x0,y0),0,pi/2,0,rmax);
+end
+g11=g;
+
+rmax=@(theta) d1./sin(theta-pi/3)*sin(pi/3); % polar coordination:
+x0=-0.2;y0=0.4;
+for j=1:n+1
+    theta1=(j-1)*h;
+    z1=cos(theta1);z2=sin(theta1);
+    c=[z1,z2];
+    g(j,1)=quad2d(@(theta,r) func3(theta,r,c,x0,y0),pi/2,pi,0,rmax);
+end
+g12=g;
+
+rmax=@(theta) d1./sin(4*pi/3-theta)*sin(2*pi/3); % polar coordination:
+x0=-0.2;y0=0.4;
+for j=1:n+1
+    theta1=(j-1)*h;
+    z1=cos(theta1);z2=sin(theta1);
+    c=[z1,z2];
+    g(j,1)=quad2d(@(theta,r) func3(theta,r,c,x0,y0),pi,7*pi/6,0,rmax);
+end
+g13=g;
+
+rmax=@(theta) sqrt(3)/2*d1./cos(3*pi/2-theta); % polar coordination:
+x0=-0.2;y0=0.4;
+for j=1:n+1
+    theta1=(j-1)*h;
+    z1=cos(theta1);z2=sin(theta1);
+    c=[z1,z2];
+    g(j,1)=quad2d(@(theta,r) func3(theta,r,c,x0,y0),7*pi/6,9*pi/6,0,rmax);
+end
+g14=g;
+
+rmax=@(theta) sqrt(3)/2*d1./cos(theta-3*pi/2); % polar coordination:
+x0=-0.2;y0=0.4;
+for j=1:n+1
+    theta1=(j-1)*h;
+    z1=cos(theta1);z2=sin(theta1);
+    c=[z1,z2];
+    g(j,1)=quad2d(@(theta,r) func3(theta,r,c,x0,y0),9*pi/6,11*pi/6,0,rmax);
+end
+g15=g;
+
+rmax=@(theta) d1./sin(theta-5*pi/3)*sin(2*pi/3); % polar coordination:
+x0=-0.2;y0=0.4;
+for j=1:n+1
+    theta1=(j-1)*h;
+    z1=cos(theta1);z2=sin(theta1);
+    c=[z1,z2];
+    g(j,1)=quad2d(@(theta,r) func3(theta,r,c,x0,y0),11*pi/6,12*pi/6,0,rmax);
+end
+g16=g;
+g1=g11+g12+g13+g14+g15+g16;
+
+%ellipsoid (double integration)
+d=0.5/2;
+rmax=@(theta) d./cos(theta); % polar coordination:
+x0=-0.1;y0=-0.3;
+for j=1:n+1
+    theta1=(j-1)*h;
+    z1=cos(theta1);z2=sin(theta1);
+    c=[z1,z2];
+    g(j,1)=quad2d(@(theta,r) func3(theta,r,c,x0,y0),0,pi/4,0,rmax);
+end
+g31=g;
+rmax=@(theta) d./sin(theta); % polar coordination:
+x0=-0.1;y0=-0.3;
+for j=1:n+1
+    theta1=(j-1)*h;
+    z1=cos(theta1);z2=sin(theta1);
+    c=[z1,z2];
+    g(j,1)=quad2d(@(theta,r) func3(theta,r,c,x0,y0),pi/4,3*pi/4,0,rmax);
+end
+g32=g;
+rmax=@(theta) -d./cos(theta); % polar coordination:
+x0=-0.1;y0=-0.3;
+for j=1:n+1
+    theta1=(j-1)*h;
+    z1=cos(theta1);z2=sin(theta1);
+    c=[z1,z2];
+    g(j,1)=quad2d(@(theta,r) func3(theta,r,c,x0,y0),3*pi/4,5*pi/4,0,rmax);
+end
+g33=g;
+rmax=@(theta) -d./sin(theta); % polar coordination:
+x0=-0.1;y0=-0.3;
+for j=1:n+1
+    theta1=(j-1)*h;
+    z1=cos(theta1);z2=sin(theta1);
+    c=[z1,z2];
+    g(j,1)=quad2d(@(theta,r) func3(theta,r,c,x0,y0),5*pi/4,7*pi/4,0,rmax);
+end
+g34=g;
+rmax=@(theta) d./cos(theta); % polar coordination:
+x0=-0.1;y0=-0.3;
+for j=1:n+1
+    theta1=(j-1)*h;
+    z1=cos(theta1);z2=sin(theta1);
+    c=[z1,z2];
+    g(j,1)=quad2d(@(theta,r) func3(theta,r,c,x0,y0),7*pi/4,8*pi/4,0,rmax);
+end
+g35=g;
+g3=g31+g32+g33+g34+g35;
+
+%disk (double integration)
+d=0.5/2;
+rmax=@(theta) d./cos(theta); % polar coordination:
+x0=-0.1;y0=-0.3;
+for j=1:n+1
+    theta1=(j-1)*h;
+    z1=cos(theta1);z2=sin(theta1);
+    c=[z1,z2];
+    g(j,1)=quad2d(@(theta,r) func3(theta,r,c,x0,y0),0,pi/4,0,rmax);
+end
+g31=g;
+rmax=@(theta) d./sin(theta); % polar coordination:
+x0=-0.1;y0=-0.3;
+for j=1:n+1
+    theta1=(j-1)*h;
+    z1=cos(theta1);z2=sin(theta1);
+    c=[z1,z2];
+    g(j,1)=quad2d(@(theta,r) func3(theta,r,c,x0,y0),pi/4,3*pi/4,0,rmax);
+end
+g32=g;
+rmax=@(theta) -d./cos(theta); % polar coordination:
+x0=-0.1;y0=-0.3;
+for j=1:n+1
+    theta1=(j-1)*h;
+    z1=cos(theta1);z2=sin(theta1);
+    c=[z1,z2];
+    g(j,1)=quad2d(@(theta,r) func3(theta,r,c,x0,y0),3*pi/4,5*pi/4,0,rmax);
+end
+g33=g;
+rmax=@(theta) -d./sin(theta); % polar coordination:
+x0=-0.1;y0=-0.3;
+for j=1:n+1
+    theta1=(j-1)*h;
+    z1=cos(theta1);z2=sin(theta1);
+    c=[z1,z2];
+    g(j,1)=quad2d(@(theta,r) func3(theta,r,c,x0,y0),5*pi/4,7*pi/4,0,rmax);
+end
+g34=g;
+rmax=@(theta) d./cos(theta); % polar coordination:
+x0=-0.1;y0=-0.3;
+for j=1:n+1
+    theta1=(j-1)*h;
+    z1=cos(theta1);z2=sin(theta1);
+    c=[z1,z2];
+    g(j,1)=quad2d(@(theta,r) func3(theta,r,c,x0,y0),7*pi/4,8*pi/4,0,rmax);
+end
+g35=g;
+g3=g31+g32+g33+g34+g35;
+g=g1+g2+g3;

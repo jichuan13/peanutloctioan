@@ -1,0 +1,61 @@
+a=0:2*pi/12000:2*pi;
+x1=cos(a);y1=sin(a);
+plot(x1,y1,'r')
+axis([-1.5 1.5 -1.5 1.5])
+hold on
+rr=0.02;
+d=0.5/2;
+for j=1:length(a)
+    if a(j)>=0&&a(j)<pi/4
+        r1(j)=d/cos(a(j));
+    elseif a(j)>=pi/4&&a(j)<3*pi/4
+        r1(j)=d/sin(a(j));
+     elseif a(j)>=3*pi/4&&a(j)<5*pi/4
+        r1(j)=-d/cos(a(j));
+      elseif a(j)>=5*pi/4&&a(j)<7*pi/4
+        r1(j)=-d/sin(a(j));
+    else
+        r1(j)=d/cos(a(j));
+    end
+end
+x2=-0.1+r1.*cos(a);y2=-0.3+r1.*sin(a);
+x21=-0.22+rr*cos(a);y21=-0.47+rr*sin(a);
+plot(x2,y2,'r-',x21,y21,'k-')
+
+d1=0.3/2;
+for j=1:length(a)
+    if a(j)>=0&&a(j)<pi/2
+        r2(j)=d1/sin(2*pi/3-a(j))*sin(pi/3);
+    elseif a(j)>=pi/2&&a(j)<pi
+        r2(j)=d1/sin(a(j)-pi/3)*sin(pi/3);
+     elseif a(j)>=pi&&a(j)<7*pi/6
+        r2(j)=d1/sin(4*pi/3-a(j))*sin(2*pi/3);
+      elseif a(j)>=7*pi/6&&a(j)<3*pi/2
+        r2(j)=sqrt(3)/2*d1/cos(3*pi/2-a(j));
+       elseif a(j)>=3*pi/2&&a(j)<11*pi/6
+        r2(j)=sqrt(3)/2*d1/cos(a(j)-3*pi/2);       
+    else
+        r2(j)=d1/sin(a(j)-5*pi/3)*sin(2*pi/3);
+    end
+end
+x4=-0.2+r2.*cos(a);y4=0.4+r2.*sin(a);
+x41=-0.32+rr*cos(a);y41=0.5+rr*sin(a);
+plot(x4,y4,'r-',x41,y41,'k-')
+
+d2=0.5/2;
+for j=1:length(a)
+    if a(j)>=0&&a(j)<pi/4
+        r2(j)=d2/cos(a(j));
+    elseif a(j)>=pi/4&&a(j)<3*pi/4
+        r2(j)=d2/sin(a(j));
+     elseif a(j)>=3*pi/4&&a(j)<5*pi/4
+        r2(j)=-d2/cos(a(j));
+      elseif a(j)>=5*pi/4&&a(j)<7*pi/4
+        r2(j)=-d2/sin(a(j));
+    else
+        r2(j)=d2/cos(a(j));
+    end
+end
+x5=0.6+r2.*cos(a);y5=0.1+r2.*sin(a);
+x51=0.71+rr*cos(a);y51=0.23+rr*sin(a);
+plot(x5,y5,'r-',x51,y51,'k-')
